@@ -2,8 +2,9 @@ import "./style.css";
 
 // Grab required elements
 const inputBtn = document.getElementById("input-btn") as HTMLButtonElement;
-const textareaInput = document.getElementById("json-input") as HTMLTextAreaElement;
+const copyBtn = document.getElementById("copy-btn") as HTMLButtonElement;
 const jsonOutput = document.getElementById("json-output") as HTMLTextAreaElement;
+const textareaInput = document.getElementById("json-input") as HTMLTextAreaElement;
 
 function getType(value: any): string {
   if (typeof value === "string") {
@@ -16,7 +17,7 @@ function getType(value: any): string {
     return "string | null;";
   } else if (Array.isArray(value)) {
     const firstElement = value[0];
-    
+
     if (typeof firstElement === "string") {
       return "string[];";
     } else if (typeof firstElement === "number") {
@@ -57,4 +58,14 @@ inputBtn?.addEventListener("click", () => {
 
   console.log(outputString);
   jsonOutput.value = outputString;
+});
+
+copyBtn.addEventListener("click", () => {
+  if (jsonOutput.value === "") {
+    alert("Output is empty");
+    return;
+  };
+
+  window.navigator.clipboard.writeText(jsonOutput.value);
+  alert("Copied!");
 });

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>json2types</title>
+  </head>
+  <body class="bg-neutral-800 text-white py-10 px-2 font-serif">
+    <h1 class="text-xl text-center font-medium mb-10">json2types</h1>
+
+    <div class="mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- JSON Input Container -->
+      <div class="flex flex-col gap-y-6">
+        <div class="flex flex-col">
+          <label for="json-input" class="mb-2">JSON Input:</label>
+          <textarea
+            rows="14"
+            id="json-input"
+            name="json-input"
+            class="placeholder:text-gray-200 bg-neutral-700 p-2 text-white rounded-md resize-none font-mono"
+            placeholder='{
+  "name": "button",
+  "type": "submit",
+}'
+          ></textarea>
+        </div>
+        <button
+          id="input-btn"
+          type="button"
+          class="h-10 bg-white text-black lg:w-2/5 rounded-md font-bold"
+        >Convert</button>
+      </div>
+
+      <!-- Output Container (types) -->
+      <div class="flex flex-col gap-y-6">
+        <div class="flex flex-col">
+          <label for="json-output" class="mb-2">JSON Output:</label>
+          <textarea
+            disabled
+            rows="14"
+            id="json-output"
+            name="json-output"
+            class="placeholder:text-gray-200 p-2 text-white rounded-md resize-none disabled:bg-neutral-700 cursor-not-allowed font-mono"
+          ></textarea>
+        </div>
+        <button
+          id="copy-btn"
+          type="button"
+          class="h-10 bg-black text-white lg:w-2/5 rounded-md font-bold"
+        >Copy</button>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

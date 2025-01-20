@@ -7,7 +7,7 @@ const jsonOutput = document.getElementById("json-output") as HTMLTextAreaElement
 const textareaInput = document.getElementById("json-input") as HTMLTextAreaElement;
 const toastDiv = document.getElementById("toast") as HTMLDivElement;
 
-// TODO list: check for array with multiple types, check for optional values, check for 2d array types
+// TODO: check for optional values
 
 function getType(value: any, indentLevel = 1): string {
   const indent = "\t".repeat(indentLevel);
@@ -23,18 +23,26 @@ function getType(value: any, indentLevel = 1): string {
   } else if (Array.isArray(value)) {
     const firstElement = value[0];
     if (!firstElement) return "any[]";
-    if (Array.isArray(firstElement)) return "any[][]";
 
-    if (typeof firstElement === "string") {
-      return "string[]";
-    } else if (typeof firstElement === "number") {
-      return "number[]";
-    } else if (typeof firstElement === "boolean") {
-      return "boolean[]";
-    } else if (typeof firstElement === "object") {
-      const nestedType = getType(firstElement, indentLevel);
-      return `${nestedType}[]`;
+    // check each array index type
+    let sameType = true;
+    for (let i = 0; i < value.length - 1; i++) {
+      if (typeof value[i] !== typeof value[i+1]) {
+        sameType = false;
+        break;
+      };
     };
+
+    if (!sameType) return "any[]";
+
+    // check for 2d array
+    if (Array.isArray(firstElement)) {
+      const type = getType(firstElement[0]);
+      return `${type}[][]`;
+    };
+
+    const type = getType(firstElement, indentLevel);
+    return `${type}[]`;
   } else if (typeof value === "object") {
     if (Object.keys(value).length === 0) return "{};";
 
@@ -110,7 +118,7 @@ copyBtn.addEventListener("click", () => {
     toastDiv.classList.add("success", "flex");
 
     setTimeout(() => {
-      toastDiv.classList.remove("flex", "succes");
+      toastDiv.classList.remove("flex", "success");
       toastDiv.classList.add("hidden");
     }, 2000);
 });

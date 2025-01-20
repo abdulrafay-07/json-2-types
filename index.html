@@ -10,56 +10,71 @@
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
   </head>
-  <body class="bg-neutral-800 text-white py-10 px-2 font-serif relative">
-    <!-- Toast -->
-    <div id="toast" class="text-white items-center text-[17px] w-auto absolute top-4 px-4 py-2 font-mono rounded-md right-1/2 translate-x-1/2 transform scale-90 ease-in duration-300 hidden"></div>
-    <h1 class="text-xl text-center font-medium mb-10">json2types</h1>
-
-    <div class="mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- JSON Input Container -->
-      <div class="flex flex-col gap-y-6">
-        <div class="flex flex-col">
-          <label for="json-input" class="mb-2">JSON Input:</label>
-          <textarea
-            rows="14"
-            id="json-input"
-            name="json-input"
-            class="placeholder:text-gray-200 bg-neutral-700 p-2 text-white rounded-md resize-none font-mono"
-            placeholder='{
+  <body class="bg-neutral-800 text-white font-serif relative">
+    <header class="p-3 bg-black">
+      <nav class="max-w-4xl mx-auto flex items-center justify-between">
+        <h1 class="font-medium">json2types</h1>
+        <a href="https://rafay-dev.vercel.app" target="_blank" class="font-semibold">
+          Abdul Rafay ‹𝟹
+        </a>
+      </nav>
+    </header>
+    <main class="py-10 px-2">
+      <!-- Toast -->
+      <div id="toast" class="text-white items-center text-[17px] w-auto absolute top-4 px-4 py-2 font-mono rounded-md right-1/2 translate-x-1/2 transform scale-90 ease-in duration-300 hidden"></div>
+      <div class="mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- JSON Input Container -->
+        <div class="flex flex-col gap-y-6">
+          <div class="flex flex-col">
+            <label for="json-input" class="mb-2">JSON Input:</label>
+            <textarea
+              rows="14"
+              id="json-input"
+              name="json-input"
+              class="placeholder:text-gray-200 bg-neutral-700 p-2 text-white rounded-md resize-none font-mono"
+              placeholder='{
   "name": "Alice",
   "age": 25,
   "isActive": true,
   "friends": ["Bob", "Charlie"],
   "phone": null
 }'
-          ></textarea>
+            ></textarea>
+          </div>
+          <button
+            id="input-btn"
+            type="button"
+            class="h-10 bg-white text-black rounded-md font-sans"
+          >Convert</button>
         </div>
-        <button
-          id="input-btn"
-          type="button"
-          class="h-10 bg-white text-black rounded-md font-bold"
-        >Convert</button>
-      </div>
-
-      <!-- Output Container (types) -->
-      <div class="flex flex-col gap-y-6">
-        <div class="flex flex-col">
-          <label for="json-output" class="mb-2">TypeScript Interface:</label>
-          <textarea
-            disabled
-            rows="14"
-            id="json-output"
-            name="json-output"
-            class="placeholder:text-gray-200 p-2 text-white rounded-md resize-none disabled:bg-neutral-700 cursor-not-allowed font-mono"
-          ></textarea>
+  
+        <!-- Output Container (types) -->
+        <div class="flex flex-col gap-y-6">
+          <div class="flex flex-col">
+            <label for="json-output" class="mb-2">TypeScript Interface:</label>
+            <textarea
+              disabled
+              rows="14"
+              id="json-output"
+              name="json-output"
+              class="placeholder:text-gray-200 p-2 text-white rounded-md resize-none disabled:bg-neutral-700 cursor-not-allowed font-mono"
+              placeholder="interface JsonType {
+	name: string;
+	age: number;
+	isActive: boolean;
+	friends: string[];
+	phone: string | null;
+};"
+            ></textarea>
+          </div>
+          <button
+            id="copy-btn"
+            type="button"
+            class="h-10 bg-black text-white rounded-md font-sans"
+          >Copy</button>
         </div>
-        <button
-          id="copy-btn"
-          type="button"
-          class="h-10 bg-black text-white rounded-md font-bold"
-        >Copy</button>
       </div>
-    </div>
+    </main>
 
     <script type="module" src="/src/main.ts"></script>
   </body>

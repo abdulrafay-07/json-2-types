@@ -4,8 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>json2types</title>
+
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
   </head>
-  <body class="bg-neutral-800 text-white py-10 px-2 font-serif">
+  <body class="bg-neutral-800 text-white py-10 px-2 font-serif relative">
+    <!-- Toast -->
+    <div id="toast" class="text-white items-center text-[17px] w-auto absolute top-4 px-4 py-2 font-mono rounded-md right-1/2 translate-x-1/2 transform scale-90 ease-in duration-300 hidden"></div>
     <h1 class="text-xl text-center font-medium mb-10">json2types</h1>
 
     <div class="mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">

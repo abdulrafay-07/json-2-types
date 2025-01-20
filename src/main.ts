@@ -5,6 +5,7 @@ const inputBtn = document.getElementById("input-btn") as HTMLButtonElement;
 const copyBtn = document.getElementById("copy-btn") as HTMLButtonElement;
 const jsonOutput = document.getElementById("json-output") as HTMLTextAreaElement;
 const textareaInput = document.getElementById("json-input") as HTMLTextAreaElement;
+const toastDiv = document.getElementById("toast") as HTMLDivElement;
 
 // TODO list: check for array with multiple types, check for optional values, check for 2d array types
 
@@ -46,18 +47,27 @@ function getType(value: any, indentLevel = 1): string {
     return objString + "\t".repeat(indentLevel - 1) + "}";
   };
 
-  return "unknown;";
+  return "unknown";
 };
 
-inputBtn?.addEventListener("click", () => {
+inputBtn.addEventListener("click", () => {
   let parsedInput;
 
   try {
     parsedInput = JSON.parse(textareaInput.value);
   } catch (error) {
-    alert("Invalid JSON input. Please check your syntax. (error in console)");
+    toastDiv.innerHTML = "✖ Invalid JSON input";
+    toastDiv.classList.remove("hidden");
+    toastDiv.classList.add("error", "flex");
+
     console.log(error);
-    return
+
+    setTimeout(() => {
+      toastDiv.classList.remove("flex", "error");
+      toastDiv.classList.add("hidden");
+    }, 2000);
+    
+    return;
   };
 
   const hashMap = new Map();
@@ -81,10 +91,26 @@ inputBtn?.addEventListener("click", () => {
 
 copyBtn.addEventListener("click", () => {
   if (jsonOutput.value === "") {
-    alert("Output is empty");
+    toastDiv.innerHTML = "✖ Nothing to copy";
+    toastDiv.classList.remove("hidden");
+    toastDiv.classList.add("error", "flex");
+
+    setTimeout(() => {
+      toastDiv.classList.remove("flex", "error");
+      toastDiv.classList.add("hidden");
+    }, 2000);
+
     return;
   };
 
   window.navigator.clipboard.writeText(jsonOutput.value);
-  alert("Copied!");
+
+  toastDiv.innerHTML = "✔ Interface copied";
+    toastDiv.classList.remove("hidden");
+    toastDiv.classList.add("success", "flex");
+
+    setTimeout(() => {
+      toastDiv.classList.remove("flex", "succes");
+      toastDiv.classList.add("hidden");
+    }, 2000);
 });
